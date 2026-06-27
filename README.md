@@ -1,6 +1,6 @@
 # Project Shikhara 🛕
 
-> *A shikhara (शिखर) is the towering spire that crowns a Hindu temple — a vertical axis connecting earth to the divine, and the most recognisable silhouette of temple architecture across the Indian subcontinent. Project Shikhara takes its name from this structure: a guiding landmark, visible from afar, helping people find their way.*
+> *A shikhara is the towering spire that crowns a Hindu temple — a vertical axis connecting earth to the divine, and the most recognisable silhouette of temple architecture across the Indian subcontinent. Project Shikhara takes its name from this structure: a guiding landmark, visible from afar, helping people find their way.*
 
 **Project Shikhara** is a public web directory of Hindu temples across Germany — an open, searchable, and interactive resource for the Hindu diaspora and the culturally curious.
 
@@ -105,7 +105,7 @@ Project_Shikhara/
 
 ```bash
 # Clone the repository
-git clone https://github.com/<your-username>/Project_Shikhara.git
+git clone https://github.com/ChaithraBangaloreVijayakumar/Project_Shikhara.git
 cd Project_Shikhara
 
 # Install dependencies
@@ -140,4 +140,4 @@ python data/scripts/load_data.py data/transformed/transformed_data.csv
 
 ## About
 
-Built by [Chaithra](https://github.com/<your-username>) as a portfolio project combining data engineering, full-stack web development, and applied AI — with the goal of building something genuinely useful for a real community.
+Built by [Chaithra](https://github.com/ChaithraBangaloreVijayakumar) as a portfolio project combining data engineering, full-stack web development, and applied AI — with the goal of building something genuinely useful for a real community.
