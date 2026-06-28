@@ -1,0 +1,19 @@
+# Data pipeline
+pandas==2.0.3
+python-dotenv==1.2.2
+
+# Database
+psycopg2-binary==2.9.12
+pgvector==0.4.1
+SQLAlchemy==2.0.40
+
+# Backend (coming soon)
+# fastapi
+# uvicorn
+
+# Chatbot / RAG (coming soon)
+# langchain
+# langchain-groq
+
+fastapi==0.115.0
+uvicorn==0.30.0

@@ -19,11 +19,12 @@ router = APIRouter(prefix="/temples", tags=["temples"])
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
-def build_google_maps_url(street, city, postal_code):
-    """Construct a Google Maps search URL from address components."""
+def build_google_maps_url(name, street, city, postal_code):
+    """Construct a Google Maps search URL using temple name and address."""
     if not any([street, city, postal_code]):
         return None
-    query = ", ".join(filter(None, [street, city, postal_code, "Germany"]))
+    address = ", ".join(filter(None, [street, city, postal_code, "Germany"]))
+    query = f"{name}, {address}" if name else address
     return f"https://www.google.com/maps/search/?api=1&query={query.replace(' ', '+')}"
 
 
@@ -48,7 +49,7 @@ def build_temple(row, contacts, hours):
         state=              row['state'],
         location_latitude=  row['location_latitude'],
         location_longitude= row['location_longitude'],
-        google_maps_url=    build_google_maps_url(row['street'], row['city'], row['postal_code']),
+        google_maps_url=    build_google_maps_url(row['name'], row['street'], row['city'], row['postal_code']),
         note=               row['note'],
         contact=            contact,
         opening_hours=      opening_hours,

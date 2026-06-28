@@ -1,0 +1,210 @@
+/* =============================================================================
+   Project Shikhara — Base Styles
+   Fonts, CSS variables, reset, and shared utility classes
+   ============================================================================= */
+
+/* ── Google Fonts ──────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+
+/* ── CSS Variables ─────────────────────────────────────────────────────────── */
+:root {
+    /* Colours */
+    --colour-primary:       #E8722A;   /* saffron orange — accent */
+    --colour-gold:          #E8B86D;   /* warm gold — secondary accent */
+    --colour-bg:            #FAF6F1;   /* cream — page background */
+    --colour-white:         #FFFFFF;
+    --colour-text:          #1A1A1A;   /* near black — primary text */
+    --colour-text-muted:    #555555;   /* muted grey — secondary text */
+    --colour-border:        #DDD5C8;   /* warm border */
+    --colour-sidebar-bg:    #FFFFFF;
+    --colour-hover:         #F5EDE3;   /* light saffron tint for hover states */
+
+    /* Typography */
+    --font-display:         'Cinzel', serif;
+    --font-body:            'Inter', sans-serif;
+
+    /* Sizing */
+    --sidebar-width:        400px;
+    --chatbot-height:       60px;
+    --nav-height:           64px;
+
+    /* Shadows */
+    --shadow-sm:            0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-md:            0 4px 12px rgba(0, 0, 0, 0.12);
+    --shadow-lg:            0 8px 32px rgba(0, 0, 0, 0.16);
+
+    /* Transitions */
+    --transition:           0.25s ease;
+}
+
+
+/* ── Reset ─────────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family:        var(--font-body);
+    font-size:          1rem;
+    color:              var(--colour-text);
+    background-color:   var(--colour-bg);
+    line-height:        1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color:              var(--colour-primary);
+    text-decoration:    none;
+    transition:         color var(--transition);
+}
+
+a:hover {
+    color:              #C4571A;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+button {
+    cursor:         pointer;
+    font-family:    var(--font-body);
+    border:         none;
+    outline:        none;
+    transition:     all var(--transition);
+}
+
+
+/* ── Typography scale ──────────────────────────────────────────────────────── */
+h1, h2, h3, h4 {
+    font-family:    var(--font-display);
+    line-height:    1.2;
+    color:          var(--colour-text);
+}
+
+h1 { font-size: 3rem;   font-weight: 700; }
+h2 { font-size: 2rem;   font-weight: 600; }
+h3 { font-size: 1.5rem; font-weight: 600; }
+h4 { font-size: 1.125rem; font-weight: 600; }
+
+p  { font-size: 1rem;   font-weight: 400; }
+
+
+/* ── Shared utility classes ────────────────────────────────────────────────── */
+
+/* Buttons */
+.btn-primary {
+    display:            inline-flex;
+    align-items:        center;
+    gap:                0.5rem;
+    padding:            0.75rem 1.75rem;
+    background-color:   var(--colour-primary);
+    color:              var(--colour-white);
+    font-size:          0.95rem;
+    font-weight:        500;
+    border-radius:      6px;
+    transition:         background-color var(--transition), transform var(--transition);
+}
+
+.btn-primary:hover {
+    background-color:   #C4571A;
+    color:              var(--colour-white);
+    transform:          translateY(-1px);
+}
+
+.btn-outline {
+    display:            inline-flex;
+    align-items:        center;
+    gap:                0.5rem;
+    padding:            0.75rem 1.75rem;
+    background-color:   transparent;
+    color:              var(--colour-primary);
+    font-size:          0.95rem;
+    font-weight:        500;
+    border:             1.5px solid var(--colour-primary);
+    border-radius:      6px;
+    transition:         all var(--transition);
+}
+
+.btn-outline:hover {
+    background-color:   var(--colour-primary);
+    color:              var(--colour-white);
+    transform:          translateY(-1px);
+}
+
+/* Home button — top right of secondary pages */
+.btn-home {
+    display:            inline-flex;
+    align-items:        center;
+    gap:                0.4rem;
+    padding:            0.5rem 1rem;
+    background-color:   var(--colour-white);
+    color:              var(--colour-text);
+    font-size:          0.875rem;
+    font-weight:        500;
+    border:             1.5px solid var(--colour-border);
+    border-radius:      6px;
+    transition:         all var(--transition);
+}
+
+.btn-home:hover {
+    border-color:       var(--colour-primary);
+    color:              var(--colour-primary);
+}
+
+/* Tags / badges */
+.tag {
+    display:            inline-block;
+    padding:            0.2rem 0.6rem;
+    background-color:   var(--colour-hover);
+    color:              var(--colour-primary);
+    font-size:          0.75rem;
+    font-weight:        500;
+    border-radius:      4px;
+}
+
+/* Divider */
+.divider {
+    border: none;
+    border-top: 1px solid var(--colour-border);
+    margin: 1.5rem 0;
+}
+
+/* Missing info link */
+.missing-info-link {
+    font-size:      0.8rem;
+    color:          var(--colour-text-muted);
+    transition:     color var(--transition);
+}
+
+.missing-info-link:hover {
+    color: var(--colour-primary);
+}
+
+/* Loading state */
+.loading {
+    display:        flex;
+    align-items:    center;
+    justify-content: center;
+    padding:        2rem;
+    color:          var(--colour-text-muted);
+    font-size:      0.9rem;
+}
+
+/* Error state */
+.error {
+    padding:        1rem;
+    color:          #c0392b;
+    background:     #fdf0ef;
+    border-radius:  6px;
+    font-size:      0.9rem;
+}

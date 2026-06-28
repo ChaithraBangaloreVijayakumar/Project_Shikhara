@@ -1,0 +1,529 @@
+/* =============================================================================
+   Project Shikhara — Explore Pages Shared Styles
+   Used by explore.html, by-city.html, by-state.html
+   ============================================================================= */
+
+
+/* ── Page layout ───────────────────────────────────────────────────────────── */
+.explore-page {
+    display:        flex;
+    flex-direction: column;
+    height:         100vh;
+    overflow:       hidden;
+    background:     var(--colour-bg);
+}
+
+
+/* ── Top bar ───────────────────────────────────────────────────────────────── */
+.top-bar {
+    display:            flex;
+    align-items:        center;
+    justify-content:    space-between;
+    padding:            0 1.5rem;
+    height:             var(--nav-height);
+    background:         var(--colour-white);
+    border-bottom:      1px solid var(--colour-border);
+    box-shadow:         var(--shadow-sm);
+    flex-shrink:        0;
+    z-index:            10;
+}
+
+.top-bar-left {
+    display:    flex;
+    align-items: center;
+    gap:        1rem;
+}
+
+.top-bar-title {
+    font-family:    var(--font-display);
+    font-size:      1.1rem;
+    font-weight:    600;
+    color:          var(--colour-text);
+}
+
+.top-bar-title span {
+    color: var(--colour-primary);
+}
+
+.top-bar-right {
+    display:    flex;
+    align-items: center;
+    gap:        1.25rem;
+}
+
+
+/* ── Main content area ─────────────────────────────────────────────────────── */
+.explore-main {
+    display:        flex;
+    flex-direction: row;
+    flex:           1;
+    overflow:       hidden;
+}
+
+
+/* ── Table panel ───────────────────────────────────────────────────────────── */
+.table-panel {
+    width:          70%;
+    min-width:      70%;
+    display:        flex;
+    flex-direction: column;
+    border-right:   1px solid var(--colour-border);
+    overflow:       hidden;
+    flex-shrink:    0;
+}
+
+.table-header {
+    padding:        0.875rem 1.25rem;
+    border-bottom:  1px solid var(--colour-border);
+    background:     var(--colour-white);
+    flex-shrink:    0;
+}
+
+.table-header h2 {
+    font-size:      0.9rem;
+    font-weight:    600;
+    color:          var(--colour-text);
+    font-family:    var(--font-body);
+}
+
+.table-header .temple-count {
+    font-size:      0.8rem;
+    color:          var(--colour-text-muted);
+    margin-top:     0.1rem;
+}
+
+.table-scroll {
+    flex:       1;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+/* Temple table */
+.temple-table {
+    width:              100%;
+    border-collapse:    collapse;
+    font-size:          0.8rem;
+}
+
+.temple-table thead {
+    position:   sticky;
+    top:        0;
+    z-index:    2;
+}
+
+.temple-table th {
+    background:     var(--colour-bg);
+    padding:        0.6rem 0.875rem;
+    text-align:     left;
+    font-weight:    600;
+    font-size:      0.75rem;
+    color:          var(--colour-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom:  2px solid var(--colour-border);
+    white-space:    nowrap;
+}
+
+.temple-table td {
+    padding:        0.75rem 0.875rem;
+    border-bottom:  1px solid var(--colour-border);
+    vertical-align: top;
+    color:          var(--colour-text);
+    line-height:    1.4;
+}
+
+.temple-table tr {
+    cursor:     pointer;
+    transition: background-color var(--transition);
+}
+
+.temple-table tr:hover td {
+    background-color: var(--colour-hover);
+}
+
+.temple-table tr.active td {
+    background-color: #FDE8D8;
+}
+
+/* Serial number column */
+.serial-col {
+    font-weight:    600;
+    color:      var(--colour-text-muted);
+    font-size:  0.75rem;
+    width:      36px;
+    text-align: center;
+}
+
+/* Temple name column */
+.temple-name {
+    font-weight:    600;
+    color:          var(--colour-text);
+    min-width:      160px;
+}
+
+/* Address column */
+.temple-address {
+    font-weight:    600;
+    font-size:      0.8rem;
+    color:          var(--colour-text);
+    min-width:      160px;
+}
+
+.temple-address a {
+    color:          var(--colour-primary);
+    text-decoration: none;
+    border-bottom:  1px dashed var(--colour-border);
+    transition:     color var(--transition);
+}
+
+.temple-address a:hover {
+    color: #8a3b0d;
+    border-color:   var(--colour-primary);
+}
+
+/* Phone column */
+.phone-col {
+    font-weight:    600;
+    white-space: nowrap;
+    min-width:   140px;
+}
+
+/* Contact details cell */
+.contact-details {
+    font-weight:    600;
+    display:        flex;
+    flex-direction: column;
+    gap:            0.3rem;
+}
+
+.contact-detail-row {
+    display:        flex;
+    align-items:    center;
+    gap:            0.4rem;
+    font-size:      0.78rem;
+    color:          var(--colour-primary);
+    white-space:    nowrap;
+    overflow:       hidden;
+    text-overflow:  ellipsis;
+    max-width:      180px;
+}
+
+.contact-detail-row:hover {
+    color: #8a3b0d;
+}
+
+.contact-icon {
+    font-size:  0.75rem;
+    width:      14px;
+    color:      var(--colour-text-muted);
+    flex-shrink: 0;
+}
+
+/* Opening hours column */
+.hours-cell {
+    font-weight:    600;
+    font-size:      0.78rem;
+    color:          var(--colour-text-muted);
+    min-width:      140px;
+    line-height:    1.8;
+}
+
+/* ── Pagination ────────────────────────────────────────────────────────────── */
+.pagination {
+    display:        flex;
+    align-items:    center;
+    justify-content: center;
+    gap:            0.35rem;
+    padding:        0.75rem 1rem;
+    border-top:     1px solid var(--colour-border);
+    background:     var(--colour-white);
+    flex-shrink:    0;
+}
+
+.page-btn {
+    width:          32px;
+    height:         32px;
+    display:        flex;
+    align-items:    center;
+    justify-content: center;
+    border-radius:  6px;
+    font-size:      0.8rem;
+    font-weight:    500;
+    background:     transparent;
+    color:          var(--colour-text-muted);
+    border:         1px solid transparent;
+    transition:     all var(--transition);
+}
+
+.page-btn:hover {
+    background:     var(--colour-hover);
+    color:          var(--colour-primary);
+    border-color:   var(--colour-border);
+}
+
+.page-btn.active {
+    background:     var(--colour-primary);
+    color:          var(--colour-white);
+    border-color:   var(--colour-primary);
+}
+
+.page-btn:disabled {
+    opacity:    0.4;
+    cursor:     not-allowed;
+}
+
+
+/* ── Map panel ─────────────────────────────────────────────────────────────── */
+.map-panel {
+    flex:       1;
+    position:   relative;
+    overflow:   hidden;
+}
+
+#map {
+    width:  100%;
+    height: 100%;
+}
+
+
+/* ── Sidebar ───────────────────────────────────────────────────────────────── */
+.sidebar {
+    position:       fixed;
+    top:            0;
+    right:          0;
+    width:          var(--sidebar-width);
+    height:         100vh;
+    background:     var(--colour-white);
+    box-shadow:     var(--shadow-lg);
+    z-index:        1000;
+    display:        flex;
+    flex-direction: column;
+    transform:      translateX(100%);
+    transition:     transform 0.3s ease;
+    overflow:       hidden;
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebar-header {
+    display:        flex;
+    align-items:    center;
+    justify-content: space-between;
+    padding:        1rem 1.25rem;
+    border-bottom:  1px solid var(--colour-border);
+    flex-shrink:    0;
+}
+
+.sidebar-title {
+    font-family:    var(--font-display);
+    font-size:      1rem;
+    font-weight:    600;
+    color:          var(--colour-text);
+    line-height:    1.3;
+    padding-right:  0.5rem;
+}
+
+.sidebar-close {
+    width:          32px;
+    height:         32px;
+    display:        flex;
+    align-items:    center;
+    justify-content: center;
+    border-radius:  6px;
+    background:     transparent;
+    color:          var(--colour-text-muted);
+    font-size:      1.2rem;
+    border:         1px solid transparent;
+    flex-shrink:    0;
+    transition:     all var(--transition);
+}
+
+.sidebar-close:hover {
+    background:     var(--colour-hover);
+    color:          var(--colour-text);
+    border-color:   var(--colour-border);
+}
+
+.sidebar-body {
+    flex:       1;
+    overflow-y: auto;
+    padding:    1.25rem;
+}
+
+/* Sidebar sections */
+.sidebar-section {
+    margin-bottom: 1.5rem;
+}
+
+.sidebar-section-title {
+    font-size:      0.7rem;
+    font-weight:    600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color:          var(--colour-text-muted);
+    margin-bottom:  0.5rem;
+}
+
+.sidebar-address a {
+    color:          var(--colour-text);
+    font-size:      0.875rem;
+    border-bottom:  1px dashed var(--colour-border);
+    transition:     color var(--transition);
+}
+
+.sidebar-address a:hover {
+    color: var(--colour-primary);
+}
+
+/* Contact rows in sidebar */
+.sidebar-contact-row {
+    display:        flex;
+    align-items:    flex-start;
+    gap:            0.5rem;
+    margin-bottom:  0.4rem;
+    font-size:      0.85rem;
+}
+
+.sidebar-contact-row .contact-type {
+    font-weight:    500;
+    color:          var(--colour-text-muted);
+    min-width:      70px;
+    font-size:      0.78rem;
+    text-transform: capitalize;
+}
+
+.sidebar-contact-row a {
+    color:          var(--colour-primary);
+    word-break:     break-all;
+}
+
+/* Hours in sidebar */
+.sidebar-hours-row {
+    display:        flex;
+    gap:            0.75rem;
+    font-size:      0.85rem;
+    margin-bottom:  0.35rem;
+}
+
+.sidebar-hours-row .day {
+    font-weight:    500;
+    min-width:      90px;
+    color:          var(--colour-text);
+}
+
+.sidebar-hours-row .hours {
+    color:          var(--colour-text-muted);
+}
+
+/* Note in sidebar */
+.sidebar-note {
+    font-size:      0.82rem;
+    color:          var(--colour-text-muted);
+    background:     var(--colour-bg);
+    padding:        0.75rem;
+    border-radius:  6px;
+    border-left:    3px solid var(--colour-gold);
+    line-height:    1.6;
+}
+
+
+/* ── Chatbot bar placeholder ───────────────────────────────────────────────── */
+.chatbot-bar {
+    height:         var(--chatbot-height);
+    background:     var(--colour-white);
+    border-top:     1px solid var(--colour-border);
+    display:        flex;
+    align-items:    center;
+    padding:        0 1.5rem;
+    gap:            0.75rem;
+    flex-shrink:    0;
+}
+
+.chatbot-bar input {
+    flex:           1;
+    border:         1px solid var(--colour-border);
+    border-radius:  6px;
+    padding:        0.5rem 0.875rem;
+    font-family:    var(--font-body);
+    font-size:      0.875rem;
+    color:          var(--colour-text);
+    background:     var(--colour-bg);
+    outline:        none;
+    transition:     border-color var(--transition);
+}
+
+.chatbot-bar input:focus {
+    border-color: var(--colour-primary);
+}
+
+.chatbot-bar input::placeholder {
+    color: var(--colour-text-muted);
+}
+
+.chatbot-bar button {
+    padding:            0.5rem 1.25rem;
+    background-color:   var(--colour-primary);
+    color:              var(--colour-white);
+    border-radius:      6px;
+    font-size:          0.875rem;
+    font-weight:        500;
+    transition:         background-color var(--transition);
+}
+
+.chatbot-bar button:hover {
+    background-color: #C4571A;
+}
+
+
+/* ── City / State tiles (for by-city and by-state pages) ───────────────────── */
+.tiles-panel {
+    width:          220px;
+    border-right:   1px solid var(--colour-border);
+    overflow-y:     auto;
+    flex-shrink:    0;
+    background:     var(--colour-white);
+    padding:        0.75rem;
+}
+
+.tiles-panel-title {
+    font-size:      0.7rem;
+    font-weight:    600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color:          var(--colour-text-muted);
+    padding:        0.25rem 0.5rem 0.75rem;
+}
+
+.tile {
+    display:        flex;
+    align-items:    center;
+    justify-content: space-between;
+    padding:        0.6rem 0.75rem;
+    border-radius:  6px;
+    cursor:         pointer;
+    font-size:      0.85rem;
+    color:          var(--colour-text);
+    transition:     all var(--transition);
+    margin-bottom:  0.2rem;
+}
+
+.tile:hover {
+    background:     var(--colour-hover);
+    color:          var(--colour-primary);
+}
+
+.tile.active {
+    background:     var(--colour-hover);
+    color:          var(--colour-primary);
+    font-weight:    500;
+}
+
+.tile-count {
+    font-size:      0.72rem;
+    color:          var(--colour-text-muted);
+    background:     var(--colour-bg);
+    padding:        0.1rem 0.4rem;
+    border-radius:  4px;
+}
