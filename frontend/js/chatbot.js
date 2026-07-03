@@ -1,4 +1,4 @@
-// chatbot.js — streaming chatbot with status updates
+// chatbot.js — chatbot bar interaction
 
 document.addEventListener('DOMContentLoaded', () => {
     const input    = document.getElementById('chat-input');
@@ -23,45 +23,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const statusEl = document.getElementById('chat-status');
         const answerEl = document.getElementById('chat-answer-text');
-        let answerStarted = false;
 
         try {
-            const res = await fetch(`${API_BASE}/chat/stream`, {
+            const res = await fetch(`${API_BASE}/chat`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ question })
             });
 
-            const reader  = res.body.getReader();
-            const decoder = new TextDecoder();
-            let buffer = '';
+            if (!res.ok) throw new Error(`API error: ${res.status}`);
+            const data = await res.json();
 
-            while (true) {
-                const { done, value } = await reader.read();
-                if (done) break;
-                buffer += decoder.decode(value, { stream: true });
+            statusEl.style.display = 'none';
+            answerEl.style.display = 'block';
+            answerEl.textContent = data.answer;
 
-                // Process complete tokens from buffer
-                while (buffer.length > 0) {
-                    if (buffer.startsWith('__STATUS__')) {
-                        const end = buffer.indexOf('\n') === -1 ? buffer.length : buffer.indexOf('\n');
-                        const msg = buffer.slice('__STATUS__'.length, end);
-                        statusEl.textContent = `⏳ ${msg}`;
-                        buffer = buffer.slice(end + 1);
-                    } else if (buffer.startsWith('__ANSWER__')) {
-                        // Switch from status to answer display
-                        statusEl.style.display = 'none';
-                        answerEl.style.display = 'block';
-                        answerStarted = true;
-                        buffer = buffer.slice('__ANSWER__'.length);
-                    } else if (answerStarted) {
-                        answerEl.textContent += buffer;
-                        buffer = '';
-                    } else {
-                        break;
-                    }
-                }
-            }
         } catch (e) {
             statusEl.textContent = 'Sorry, something went wrong. Please try again.';
             statusEl.className = 'chat-error';
