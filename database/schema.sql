@@ -3,13 +3,11 @@
 -- =============================================================================
 
 -- Enable pgvector extension (needed for RAG/chatbot embeddings later)
-CREATE EXTENSION IF NOT EXISTS vector;
+-- CREATE EXTENSION IF NOT EXISTS vector;
 
 
 -- -----------------------------------------------------------------------------
 -- Table: location
--- Source: moralescastillo/datasets — postal-code-germany.csv
--- One row per German postal code, mapping it to its Bundesland
 -- -----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS location (
     postal_code     VARCHAR(5)      PRIMARY KEY,
@@ -19,7 +17,6 @@ CREATE TABLE IF NOT EXISTS location (
 
 -- -----------------------------------------------------------------------------
 -- Table: temples
--- Core table — one row per Hindu temple in Germany
 -- -----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS temples (
     id                  SERIAL          PRIMARY KEY,
@@ -29,20 +26,43 @@ CREATE TABLE IF NOT EXISTS temples (
     city                VARCHAR(100),
     location_latitude   DECIMAL(9, 6),
     location_longitude  DECIMAL(9, 6),
-    website             TEXT,
-    contact_phone       JSONB,
-    contact_email       JSONB,
-    contact_facebook    JSONB,
-    contact_instagram   JSONB,
-    opening_hours       JSONB,
     note                TEXT,
     created_at          TIMESTAMPTZ     NOT NULL DEFAULT NOW(),
-    updated_at          TIMESTAMPTZ     NOT NULL DEFAULT NOW()
+    updated_at          TIMESTAMPTZ     NOT NULL DEFAULT NOW(),
+    CONSTRAINT uq_temples_name_street_city UNIQUE (name, street, city)
 );
 
 
 -- -----------------------------------------------------------------------------
--- Auto-update updated_at on every row update
+-- ENUMs and child tables
+-- -----------------------------------------------------------------------------
+DO $$ BEGIN
+    CREATE TYPE contact_type AS ENUM ('phone', 'email', 'facebook', 'instagram', 'website');
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
+
+DO $$ BEGIN
+    CREATE TYPE day_of_week AS ENUM ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Closed');
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
+
+CREATE TABLE IF NOT EXISTS temple_contact (
+    id              SERIAL          PRIMARY KEY,
+    temple_id       INT             NOT NULL REFERENCES temples(id) ON DELETE CASCADE,
+    contact_type    contact_type    NOT NULL,
+    value           TEXT            NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS temple_hours (
+    id              SERIAL          PRIMARY KEY,
+    temple_id       INT             NOT NULL REFERENCES temples(id) ON DELETE CASCADE,
+    day             day_of_week     NOT NULL,
+    hours           VARCHAR(50)     NOT NULL
+);
+
+
+-- -----------------------------------------------------------------------------
+-- Trigger
 -- -----------------------------------------------------------------------------
 CREATE OR REPLACE FUNCTION set_updated_at()
 RETURNS TRIGGER AS $$
@@ -52,7 +72,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER temples_set_updated_at
+CREATE OR REPLACE TRIGGER temples_set_updated_at
     BEFORE UPDATE ON temples
     FOR EACH ROW
     EXECUTE FUNCTION set_updated_at();
@@ -61,12 +81,8 @@ CREATE TRIGGER temples_set_updated_at
 -- -----------------------------------------------------------------------------
 -- Indexes
 -- -----------------------------------------------------------------------------
-
--- Fast state-level grouping via the location join
 CREATE INDEX IF NOT EXISTS idx_temples_postal_code ON temples(postal_code);
-
--- Useful for map queries filtering by city
 CREATE INDEX IF NOT EXISTS idx_temples_city ON temples(city);
-
--- Spatial index for map radius queries
 CREATE INDEX IF NOT EXISTS idx_temples_lat_lon ON temples(location_latitude, location_longitude);
+CREATE INDEX IF NOT EXISTS idx_temple_contact_temple_id ON temple_contact(temple_id);
+CREATE INDEX IF NOT EXISTS idx_temple_hours_temple_id ON temple_hours(temple_id);
