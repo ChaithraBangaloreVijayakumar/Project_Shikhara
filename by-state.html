@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temples by State — Project Shikhara</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/explore.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body class="explore-page">
+
+    <!-- ── Top bar ───────────────────────────────────────────────────────── -->
+    <header class="top-bar">
+        <div class="top-bar-left">
+            <a href="index.html" class="btn-home">← Home</a>
+            <span class="top-bar-title">
+                <span>Shikhara</span> — By State
+            </span>
+        </div>
+        <div class="top-bar-right">
+            <a href="explore.html" class="missing-info-link">All Temples</a>
+            <a href="by-city.html" class="missing-info-link">By City</a>
+            <a href="mailto:contact@projectshikhara.de" class="missing-info-link">Missing or incorrect info?</a>
+        </div>
+    </header>
+
+    <!-- ── Main ──────────────────────────────────────────────────────────── -->
+    <main class="explore-main">
+
+        <!-- State tiles panel -->
+        <aside class="tiles-panel" id="tiles-panel">
+            <p class="tiles-panel-title">States</p>
+            <div id="state-tiles">
+                <p class="loading">Loading...</p>
+            </div>
+        </aside>
+
+        <!-- Table panel -->
+        <section class="table-panel">
+            <div class="table-header">
+                <h2 id="table-heading">All Temples in Germany</h2>
+                <p class="temple-count" id="temple-count">Loading...</p>
+            </div>
+
+            <div class="table-scroll">
+                <table class="temple-table">
+                    <thead>
+                        <tr>
+                            <th>Sl.no</th>
+                            <th>Temple</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Contact Details</th>
+                            <th>Opening Hours</th>
+                        </tr>
+                    </thead>
+                    <tbody id="temple-tbody">
+                        <tr><td colspan="6" class="loading">Loading temples...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <nav class="pagination" id="pagination"></nav>
+        </section>
+
+        <!-- Map panel -->
+        <section class="map-panel">
+            <div id="map"></div>
+        </section>
+
+    </main>
+
+    <!-- Sidebar — overlays full page -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3 class="sidebar-title" id="sidebar-name">Temple Name</h3>
+            <button class="sidebar-close" id="sidebar-close" aria-label="Close">✕</button>
+        </div>
+        <div class="sidebar-body" id="sidebar-body"></div>
+    </aside>
+
+    <!-- ── Chatbot bar ────────────────────────────────────────────────────── -->
+    <div class="chatbot-bar">
+        <input type="text" id="chat-input" placeholder="Ask about temples... e.g. Which temples are open on Sundays?" />
+        <button id="chat-btn">Ask</button>
+    </div>
+    <div class="chat-response" id="chat-response" style="display:none"></div>
+
+    <script src="js/api.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/table.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/by-state.js"></script>
+    <script src="js/chatbot.js"></script>
+
+</body>
+</html>
