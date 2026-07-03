@@ -3,6 +3,10 @@ name: Data Pipeline
 on:
   workflow_dispatch:
     inputs:
+      input_file:
+        description: 'Path to input CSV file (relative to repo root)'
+        required: true
+        default: 'data/raw/raw_data.csv'
       description:
         description: 'Reason for running the pipeline'
         required: false
@@ -24,7 +28,7 @@ jobs:
         run: pip install pandas psycopg2-binary python-dotenv requests
 
       - name: Run clean_data.py
-        run: python data/scripts/clean_data.py data/raw/raw_data.csv data/transformed/transformed_data.csv
+        run: python data/scripts/clean_data.py "${{ github.event.inputs.input_file }}" data/transformed/transformed_data.csv
 
       - name: Run load_data.py
         env:
@@ -40,5 +44,5 @@ jobs:
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add data/transformed/transformed_data.csv
-          git diff --staged --quiet || git commit -m "Auto: update transformed_data.csv [skip ci]"
+          git diff --staged --quiet || git commit -m "Auto: update transformed_data.csv from ${{ github.event.inputs.input_file }} [skip ci]"
           git push
