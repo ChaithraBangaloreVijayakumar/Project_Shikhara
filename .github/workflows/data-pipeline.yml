@@ -1,0 +1,44 @@
+name: Data Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      description:
+        description: 'Reason for running the pipeline'
+        required: false
+        default: 'Manual data update'
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install pandas psycopg2-binary python-dotenv requests
+
+      - name: Run clean_data.py
+        run: python data/scripts/clean_data.py data/raw/raw_data.csv data/transformed/transformed_data.csv
+
+      - name: Run load_data.py
+        env:
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_PORT: ${{ secrets.DB_PORT }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        run: python data/scripts/load_data.py data/transformed/transformed_data.csv
+
+      - name: Commit updated transformed data
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add data/transformed/transformed_data.csv
+          git diff --staged --quiet || git commit -m "Auto: update transformed_data.csv [skip ci]"
+          git push

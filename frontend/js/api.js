@@ -1,6 +1,8 @@
 // api.js — centralised API calls for Project Shikhara
 
-const API_BASE = 'http://127.0.0.1:8000';
+const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://127.0.0.1:8000'
+    : 'https://shikhara-api.onrender.com';
 
 
 async function apiFetch(path) {
