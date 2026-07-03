@@ -84,15 +84,17 @@
 
     <!-- ── Chatbot bar ────────────────────────────────────────────────────── -->
     <div class="chatbot-bar">
-        <input type="text" placeholder="Ask about temples... (coming soon)" disabled />
-        <button disabled>Ask</button>
+        <input type="text" id="chat-input" placeholder="Ask about temples... e.g. Which temples are open on Sundays?" />
+        <button id="chat-btn">Ask</button>
     </div>
+    <div class="chat-response" id="chat-response" style="display:none"></div>
 
     <script src="js/api.js"></script>
     <script src="js/map.js"></script>
     <script src="js/table.js"></script>
     <script src="js/sidebar.js"></script>
     <script src="js/by-state.js"></script>
+    <script src="js/chatbot.js"></script>
 
 </body>
 </html>

@@ -28,6 +28,21 @@ async function fetchCities() {
 }
 
 
-async function fetchStates() {
-    return apiFetch('/states');
+async function askChatbotStream(question, onToken) {
+    const response = await fetch(`${API_BASE}/chat/stream`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question })
+    });
+    if (!response.ok) throw new Error(`Chat API error: ${response.status}`);
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+
+    while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const token = decoder.decode(value, { stream: true });
+        onToken(token);
+    }
 }

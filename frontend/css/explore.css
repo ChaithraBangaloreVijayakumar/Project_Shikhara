@@ -429,7 +429,55 @@
 }
 
 
-/* ── Chatbot bar placeholder ───────────────────────────────────────────────── */
+/* ── Chat response panel ───────────────────────────────────────────────────── */
+.chat-response {
+    position:       fixed;
+    bottom:         var(--chatbot-height);
+    left:           0;
+    right:          0;
+    background:     var(--colour-white);
+    border-top:     1px solid var(--colour-border);
+    padding:        1rem 1.5rem;
+    box-shadow:     0 -4px 12px rgba(0,0,0,0.08);
+    z-index:        500;
+    max-height:     200px;
+    overflow-y:     auto;
+}
+
+.chat-answer {
+    display:        flex;
+    flex-direction: column;
+    gap:            0.5rem;
+}
+
+.chat-q {
+    font-size:      0.8rem;
+    font-weight:    600;
+    color:          var(--colour-text-muted);
+}
+
+.chat-a {
+    font-size:      0.875rem;
+    color:          var(--colour-text);
+    line-height:    1.6;
+    white-space:    pre-wrap;
+}
+
+.chat-status {
+    font-size:      0.875rem;
+    color:          var(--colour-text-muted);
+    font-style:     italic;
+}
+
+.chat-loading {
+    font-size:      0.875rem;
+    color:          var(--colour-text-muted);
+}
+
+.chat-error {
+    font-size:      0.875rem;
+    color:          #c0392b;
+}
 .chatbot-bar {
     height:         var(--chatbot-height);
     background:     var(--colour-white);
