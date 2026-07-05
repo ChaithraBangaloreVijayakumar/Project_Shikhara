@@ -88,6 +88,9 @@
 
 .search-box button:hover {
     background-color: #C4571A;
+}
+
+.top-bar-right {
     display:    flex;
     align-items: center;
     gap:        1.25rem;
@@ -516,9 +519,32 @@
     color:          var(--colour-text-muted);
 }
 
-.chat-error {
-    font-size:      0.875rem;
-    color:          #c0392b;
+.chat-response-inner {
+    position:   relative;
+    padding-right: 2rem;
+}
+
+.chat-close {
+    position:       absolute;
+    top:            0;
+    right:          0;
+    width:          24px;
+    height:         24px;
+    display:        flex;
+    align-items:    center;
+    justify-content: center;
+    border-radius:  4px;
+    background:     transparent;
+    color:          var(--colour-text-muted);
+    font-size:      0.85rem;
+    border:         1px solid transparent;
+    transition:     all var(--transition);
+}
+
+.chat-close:hover {
+    background:     var(--colour-hover);
+    color:          var(--colour-text);
+    border-color:   var(--colour-border);
 }
 .chatbot-bar {
     height:         var(--chatbot-height);

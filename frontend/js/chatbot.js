@@ -1,4 +1,4 @@
-// chatbot.js — chatbot bar interaction
+// chatbot.js — chatbot bar interaction with close button
 
 document.addEventListener('DOMContentLoaded', () => {
     const input    = document.getElementById('chat-input');
@@ -7,19 +7,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!input || !btn || !response) return;
 
+    // Add close button to chat response
+    function showResponse(html) {
+        response.style.display = 'block';
+        response.innerHTML = `
+            <div class="chat-response-inner">
+                <button class="chat-close" id="chat-close" title="Close">✕</button>
+                ${html}
+            </div>`;
+        document.getElementById('chat-close').addEventListener('click', () => {
+            response.style.display = 'none';
+            response.innerHTML = '';
+            input.value = '';
+        });
+    }
+
     async function submitQuestion() {
         const question = input.value.trim();
         if (!question) return;
 
         btn.disabled    = true;
         btn.textContent = 'Thinking...';
-        response.style.display = 'block';
-        response.innerHTML = `
+
+        showResponse(`
             <div class="chat-answer">
                 <span class="chat-q">Q: ${question}</span>
                 <span class="chat-status" id="chat-status">⏳ Searching the temple directory...</span>
                 <span class="chat-a" id="chat-answer-text" style="display:none"></span>
-            </div>`;
+            </div>`);
 
         const statusEl = document.getElementById('chat-status');
         const answerEl = document.getElementById('chat-answer-text');

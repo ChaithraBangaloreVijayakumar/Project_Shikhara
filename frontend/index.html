@@ -12,28 +12,20 @@
 
     <!-- ── Hero ──────────────────────────────────────────────────────────── -->
     <section class="hero parallax">
-
         <div class="hero-content">
-
             <p class="hero-eyebrow">Hindu Temples in Germany</p>
-
             <h1 class="hero-title">
                 Find your<br>
                 <span>Mandir</span>
             </h1>
-
             <p class="hero-subtitle">
                 A complete, open directory of Hindu temples across Germany —
                 from Berlin to Munich, Hamburg to Stuttgart.
             </p>
-
-            <!-- Search box -->
             <div class="hero-search">
                 <input type="text" id="search-input" placeholder="Search by temple name, city or state..." />
                 <button id="search-btn">Search</button>
             </div>
-
-            <!-- Navigation buttons -->
             <nav class="hero-nav">
                 <a href="explore.html" class="hero-nav-btn">
                     <span class="btn-label"><span>Explore all temples</span></span>
@@ -48,27 +40,25 @@
                     <span class="btn-icon">→</span>
                 </a>
             </nav>
-
         </div>
-
-        <!-- Footer -->
-        <footer class="home-footer">
-            <span>© 2025 Project Shikhara</span>
-            <div>
-                <a href="contact.html">Contact</a>
-                <a href="impressum.html">Impressum</a>
-                <a href="contact.html" class="missing-info-link">Missing or incorrect info?</a>
-            </div>
-        </footer>
-
     </section>
 
     <!-- ── Chatbot bar ────────────────────────────────────────────────────── -->
-    <div class="chatbot-bar" style="position:fixed;bottom:0;left:0;right:0;z-index:500;">
+    <div class="chatbot-bar" style="position:fixed;bottom:36px;left:0;right:0;z-index:500;">
         <input type="text" id="chat-input" placeholder="Ask about temples... e.g. Which temples are open on Sundays?" />
         <button id="chat-btn">Ask</button>
     </div>
-    <div class="chat-response" id="chat-response" style="display:none;position:fixed;bottom:60px;left:0;right:0;z-index:499;"></div>
+    <div class="chat-response" id="chat-response" style="display:none;position:fixed;bottom:96px;left:0;right:0;z-index:499;"></div>
+
+    <!-- ── Footer ────────────────────────────────────────────────────────── -->
+    <footer class="home-footer-fixed">
+        <span>© 2025 Project Shikhara</span>
+        <div>
+            <a href="contact.html">Contact</a>
+            <a href="impressum.html">Impressum</a>
+            <a href="contact.html" class="missing-info-link">Missing or incorrect info?</a>
+        </div>
+    </footer>
 
     <script src="js/api.js"></script>
     <script src="js/chatbot.js"></script>
