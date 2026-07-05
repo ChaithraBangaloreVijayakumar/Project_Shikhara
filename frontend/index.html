@@ -6,6 +6,7 @@
     <title>Project Shikhara — Hindu Temples in Germany</title>
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/explore.css">
 </head>
 <body>
 
@@ -26,30 +27,26 @@
                 from Berlin to Munich, Hamburg to Stuttgart.
             </p>
 
+            <!-- Search box -->
+            <div class="hero-search">
+                <input type="text" id="search-input" placeholder="Search by temple name, city or state..." />
+                <button id="search-btn">Search</button>
+            </div>
+
             <!-- Navigation buttons -->
             <nav class="hero-nav">
-
                 <a href="explore.html" class="hero-nav-btn">
-                    <span class="btn-label">
-                        <span>Explore all temples</span>
-                    </span>
+                    <span class="btn-label"><span>Explore all temples</span></span>
                     <span class="btn-icon">→</span>
                 </a>
-
                 <a href="by-city.html" class="hero-nav-btn">
-                    <span class="btn-label">
-                        <span>Browse by city</span>
-                    </span>
+                    <span class="btn-label"><span>Browse by city</span></span>
                     <span class="btn-icon">→</span>
                 </a>
-
                 <a href="by-state.html" class="hero-nav-btn">
-                    <span class="btn-label">
-                        <span>Browse by state</span>
-                    </span>
+                    <span class="btn-label"><span>Browse by state</span></span>
                     <span class="btn-icon">→</span>
                 </a>
-
             </nav>
 
         </div>
@@ -58,15 +55,38 @@
         <footer class="home-footer">
             <span>© 2025 Project Shikhara</span>
             <div>
-                <a href="mailto:contact@projectshikhara.de">Contact</a>
-                <a href="#">Impressum</a>
-                <a href="#" class="missing-info-link">Missing or incorrect info?</a>
+                <a href="contact.html">Contact</a>
+                <a href="impressum.html">Impressum</a>
+                <a href="contact.html" class="missing-info-link">Missing or incorrect info?</a>
             </div>
         </footer>
 
     </section>
 
+    <!-- ── Chatbot bar ────────────────────────────────────────────────────── -->
+    <div class="chatbot-bar" style="position:fixed;bottom:0;left:0;right:0;z-index:500;">
+        <input type="text" id="chat-input" placeholder="Ask about temples... e.g. Which temples are open on Sundays?" />
+        <button id="chat-btn">Ask</button>
+    </div>
+    <div class="chat-response" id="chat-response" style="display:none;position:fixed;bottom:60px;left:0;right:0;z-index:499;"></div>
+
     <script src="js/api.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script>
+        const searchBtn   = document.getElementById('search-btn');
+        const searchInput = document.getElementById('search-input');
+
+        function doSearch() {
+            const q = searchInput.value.trim();
+            if (q) {
+                sessionStorage.setItem('shikhara_search', q);
+                window.location.href = 'explore.html';
+            }
+        }
+
+        searchBtn.addEventListener('click', doSearch);
+        searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+    </script>
 
 </body>
 </html>

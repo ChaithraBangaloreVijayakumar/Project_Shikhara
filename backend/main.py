@@ -60,7 +60,29 @@ def get_states(conn=Depends(get_db)):
         return cur.fetchall()
 
 
-# ── Chat ──────────────────────────────────────────────────────────────────────
+@app.get("/search", response_model=PaginatedTemples)
+def search_temples(
+    q:          str = Query(..., min_length=1),
+    page:       int = Query(1, ge=1),
+    page_size:  int = Query(5, ge=1, le=100),
+    conn=Depends(get_db)
+):
+    """Search temples by name, city, state or street."""
+    from routers.temples import fetch_temples_data
+    with conn.cursor(cursor_factory=RealDictCursor) as cur:
+        where  = "WHERE t.name ILIKE %s OR t.city ILIKE %s OR t.street ILIKE %s OR l.state ILIKE %s"
+        term   = f"%{q}%"
+        params = (term, term, term, term)
+        temples, total = fetch_temples_data(cur, where, params, page, page_size)
+
+    import math
+    return PaginatedTemples(
+        total=      total,
+        page=       page,
+        page_size=  page_size,
+        pages=      math.ceil(total / page_size) if total else 0,
+        data=       temples
+    )
 
 class ChatRequest(BaseModel):
     question: str

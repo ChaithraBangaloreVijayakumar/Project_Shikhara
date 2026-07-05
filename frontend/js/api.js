@@ -30,6 +30,12 @@ async function fetchCities() {
 }
 
 
+async function fetchSearch(query, page = 1, page_size = 5) {
+    const params = new URLSearchParams({ q: query, page, page_size });
+    return apiFetch(`/search?${params}`);
+}
+
+
 async function askChatbotStream(question, onToken) {
     const response = await fetch(`${API_BASE}/chat/stream`, {
         method: 'POST',

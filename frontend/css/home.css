@@ -9,7 +9,7 @@
     width:              100%;
     height:             100vh;
     min-height:         600px;
-    background-image:   url('../assets/images/hero.png');
+    background-image:   url('../assets/images/hero.jpg');
     background-size:    cover;
     background-position: center right;
     background-repeat:  no-repeat;
@@ -75,7 +75,44 @@
     line-height:    1.7;
 }
 
-/* ── Navigation buttons ────────────────────────────────────────────────────── */
+/* ── Search box on home page ───────────────────────────────────────────────── */
+.hero-search {
+    display:        flex;
+    gap:            0.5rem;
+    margin-bottom:  1.5rem;
+    max-width:      380px;
+}
+
+.hero-search input {
+    flex:           1;
+    border:         1.5px solid var(--colour-border);
+    border-radius:  6px;
+    padding:        0.625rem 0.875rem;
+    font-family:    var(--font-body);
+    font-size:      0.875rem;
+    color:          var(--colour-text);
+    background:     var(--colour-white);
+    outline:        none;
+    transition:     border-color var(--transition);
+}
+
+.hero-search input:focus {
+    border-color: var(--colour-primary);
+}
+
+.hero-search button {
+    padding:            0.625rem 1.25rem;
+    background-color:   var(--colour-primary);
+    color:              var(--colour-white);
+    border-radius:      6px;
+    font-size:          0.875rem;
+    font-weight:        500;
+    transition:         background-color var(--transition);
+}
+
+.hero-search button:hover {
+    background-color: #C4571A;
+}
 .hero-nav {
     display:        flex;
     flex-direction: column;

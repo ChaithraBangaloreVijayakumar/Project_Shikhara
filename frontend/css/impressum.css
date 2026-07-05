@@ -1,0 +1,154 @@
+/* =============================================================================
+   Project Shikhara — Simple Pages (Impressum, Contact)
+   ============================================================================= */
+
+.simple-page {
+    min-height:         100vh;
+    background:         var(--colour-bg);
+    display:            flex;
+    flex-direction:     column;
+}
+
+.simple-header {
+    display:            flex;
+    align-items:        center;
+    gap:                1rem;
+    padding:            0 2rem;
+    height:             var(--nav-height);
+    background:         var(--colour-white);
+    border-bottom:      1px solid var(--colour-border);
+    box-shadow:         var(--shadow-sm);
+}
+
+.simple-header-title {
+    font-family:        var(--font-display);
+    font-size:          1.1rem;
+    font-weight:        600;
+    color:              var(--colour-text);
+}
+
+.simple-header-title span {
+    color: var(--colour-primary);
+}
+
+.simple-main {
+    flex:               1;
+    display:            flex;
+    justify-content:    center;
+    padding:            3rem 1.5rem;
+}
+
+.simple-card {
+    background:         var(--colour-white);
+    border:             1px solid var(--colour-border);
+    border-radius:      10px;
+    padding:            2.5rem 3rem;
+    width:              100%;
+    max-width:          640px;
+    box-shadow:         var(--shadow-sm);
+}
+
+.simple-card h1 {
+    font-size:          1.75rem;
+    margin-bottom:      0.25rem;
+}
+
+.legal-note {
+    font-size:          0.8rem;
+    color:              var(--colour-text-muted);
+    margin-bottom:      1.5rem;
+}
+
+.form-intro {
+    font-size:          0.9rem;
+    color:              var(--colour-text-muted);
+    margin-bottom:      1.5rem;
+    line-height:        1.6;
+}
+
+/* Impressum sections */
+.impressum-section {
+    margin-bottom:      1.75rem;
+}
+
+.impressum-section h2 {
+    font-size:          0.75rem;
+    font-weight:        600;
+    text-transform:     uppercase;
+    letter-spacing:     0.08em;
+    color:              var(--colour-text-muted);
+    margin-bottom:      0.5rem;
+    font-family:        var(--font-body);
+}
+
+.impressum-section p {
+    font-size:          0.9rem;
+    color:              var(--colour-text);
+    line-height:        1.7;
+}
+
+/* Contact form */
+.contact-form {
+    display:            flex;
+    flex-direction:     column;
+    gap:                1.25rem;
+    margin-top:         1.5rem;
+}
+
+.form-group {
+    display:            flex;
+    flex-direction:     column;
+    gap:                0.4rem;
+}
+
+.form-group label {
+    font-size:          0.85rem;
+    font-weight:        500;
+    color:              var(--colour-text);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    border:             1px solid var(--colour-border);
+    border-radius:      6px;
+    padding:            0.625rem 0.875rem;
+    font-family:        var(--font-body);
+    font-size:          0.875rem;
+    color:              var(--colour-text);
+    background:         var(--colour-bg);
+    outline:            none;
+    transition:         border-color var(--transition);
+    width:              100%;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color:       var(--colour-primary);
+    background:         var(--colour-white);
+}
+
+.form-group textarea {
+    resize:             vertical;
+    min-height:         120px;
+}
+
+.form-group select {
+    cursor:             pointer;
+}
+
+.contact-form .btn-primary {
+    align-self:         flex-start;
+    margin-top:         0.5rem;
+}
+
+.form-success {
+    margin-top:         2rem;
+    padding:            1rem 1.25rem;
+    background:         #f0fdf4;
+    border:             1px solid #86efac;
+    border-radius:      6px;
+    color:              #166534;
+    font-size:          0.9rem;
+}
