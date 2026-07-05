@@ -88,7 +88,6 @@
 
 .search-box button:hover {
     background-color: #C4571A;
-}
     display:    flex;
     align-items: center;
     gap:        1.25rem;

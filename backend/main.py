@@ -3,13 +3,14 @@ Project Shikhara — FastAPI application entry point.
 Run with: uvicorn backend.main:app --reload
 """
 
-from fastapi import FastAPI, Depends
+import math
+from fastapi import FastAPI, Depends, Query
 from fastapi.middleware.cors import CORSMiddleware
 from psycopg2.extras import RealDictCursor
 from pydantic import BaseModel
 
 from database import get_db
-from models import CityItem, StateItem
+from models import CityItem, StateItem, PaginatedTemples
 from routers import temples
 
 app = FastAPI(
@@ -75,7 +76,6 @@ def search_temples(
         params = (term, term, term, term)
         temples, total = fetch_temples_data(cur, where, params, page, page_size)
 
-    import math
     return PaginatedTemples(
         total=      total,
         page=       page,
